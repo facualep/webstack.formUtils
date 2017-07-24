@@ -116,18 +116,22 @@ window.formUtils = (function($) {
     * @param years: integer
     */
    formValidator.prototype.isValidBirthdate = function(date, years) {
-     var day = date.substring(0, 2);
-     var month = date.substring(3, 5);
-     var year = date.substring(6, 10);
-     var birthDate = new Date(year, month - 1, day);
-     var today = new Date();
-     today.setFullYear(today.getFullYear() - years);
-     var timeDiff = today.getTime() - birthDate.getTime();
-     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-     if (diffDays < 0) {
-       return false
+     if (this.isValidDate(date)) {
+       var day = date.substring(0, 2);
+       var month = date.substring(3, 5);
+       var year = date.substring(6, 10);
+       var birthDate = new Date(year, month - 1, day);
+       var today = new Date();
+       today.setFullYear(today.getFullYear() - years);
+       var timeDiff = today.getTime() - birthDate.getTime();
+       var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+       if (diffDays < 0) {
+         return false
+       } else {
+         return true
+       }
      } else {
-       return true
+       return false
      }
    }
 
